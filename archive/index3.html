@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Interactive Video Player</title>
+	<link href="https://cdn.jsdelivr.net/mediaelement/latest/mediaelementplayer.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+<!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+	<div id="main-container">
+		<video id="main-video" width="1280" height="720" class="mejs-player" controls>
+			<source src="video/video.mp4" type="video/mp4">
+			<source src="video/video.ogg" type="video/ogg">
+			<track label="English" kind="captions" src="video/captions.vtt" srclang="en" default>
+			Your browser does not support HTML5 video.
+		</video>
+		
+		<p id="caption-copy">
+		<span id="1" data-start="00:00:00,240">Now that we've looked at the architecture of the internet, let's see how you might </span>
+		<span id="2" data-start="00:00:04,130">connect your personal devices to the internet inside your house. </span>
+		<span id="3" data-start="00:00:07,535">Well there are many ways to connect to the internet, and</span>
+		</p>
+		<div>Current Time : <span id="currentTime">0</span></div>
+		<div>Total time : <span id="totalTime">0</span></div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/mediaelement/latest/mediaelement-and-player.min.js"></script>
+
+	<script>
+	//Media Elements Player
+		$('audio, video').mediaelementplayer({
+			success: function(player, node) {
+				$('#' + node.id + '-mode').html('mode: ' + player.pluginType);
+			},
+			startLanguage: 'en',
+			translationSelector: true,
+			stretching: 'auto'
+		});
+		
+	
+		// View Times of Player
+		$(function(){
+			$('#currentTime').html($('video').get(0).load());
+			//$('#currentTime').html($('video').get(0).play());
+		});
+
+		setInterval(function(){
+			$('#currentTime').html($('video').get(0).currentTime);
+			$('#totalTime').html($('video').get(0).duration);    
+		},500);
+
+
+		//As the media playback time changes, sentences in the transcript should highlight.
+		//Use JavaScript to listen for those changes and apply a highlight to the appropriate sentence.
+		//You can use the captions.txt file to see the times at which the words are spoken in the video.
+		var video = document.getElementById('main-video');
+		var curtime = .get(0)video.currentTime;
+		console.log(curtime);
+
+
+
+
+
+
+
+
+
+
+		/*
+		var lines = document.getElementById('main-container').getElementsByTagName('span');
+		var now = 4;
+
+		for (var i = 0, l = lines.length; i < l; i++) {
+			if (now >= +lines[i].getAttribute("start") && 
+				now <= +lines[i].getAttribute("end")) {
+				lines[i].style.color = "red";
+			break;
+			}
+		}
+	
+		(function(){
+			var v = document.getElementsByTagName('video')[0]
+			var t = document.getElementById('time');
+
+			v.addEventListener('timeupdate',function(event){
+				t.innerHTML = v.currentTime;
+			},false);
+		})();
+		*/
+
+	</script>
+
+</body>
+</html>

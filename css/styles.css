@@ -48,9 +48,17 @@ table {
 
 
 /* Layout */
+body {
+	background-color: #f3f3f3;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
 #main-container {
 	max-width: 1140px;
 	margin: 0 auto;
+	background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 video {
@@ -58,6 +66,13 @@ video {
 	max-height: auto;
 }
 
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	margin: 10px 0;
+	line-height: 1.33;
+}
+
 .highlighted {
-	color: red;
+	color: orange;
 }
